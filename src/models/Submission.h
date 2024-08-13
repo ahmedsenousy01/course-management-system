@@ -9,7 +9,9 @@ private:
     static inline int idCounter = 0;
     int id;
     Student *student;
+    int studentId;
     Assignment *assignment;
+    int assignmentId;
     double grade;
     string submissionDate;
 

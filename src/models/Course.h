@@ -17,6 +17,7 @@ private:
     double price;
 
     Teacher *teacher;
+    int teacherId;
     vector<Student *> students;
     vector<Assignment *> assignments;
 

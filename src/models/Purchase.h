@@ -11,7 +11,9 @@ private:
     static inline int idCounter = 0;
     int id;
     Student *student;
+    int studentId;
     Course *course;
+    int courseId;
     string purchaseDate;
 
 public:

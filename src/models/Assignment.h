@@ -10,6 +10,7 @@ private:
     int id;
     string title;
     Course *course;
+    int courseId;
     double assignmentScore;
     string deadline;
 
