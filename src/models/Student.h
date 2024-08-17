@@ -25,16 +25,13 @@ public:
         numberOfStudents++;
         this->setId(numberOfStudents);
     }
-    Student(string name, string email, string phoneNumber, vector<Course *> courses = {}, vector<Purchase *> purchases = {}, vector<Progress *> progress = {}, vector<Submission *> submissions = {})
+    Student(string name, string email, string password, string phoneNumber, vector<Course *> courses = {}, vector<Purchase *> purchases = {}, vector<Progress *> progress = {}, vector<Submission *> submissions = {}) : Person(name, email, password, phoneNumber)
     {
         numberOfStudents++;
         this->setId(numberOfStudents);
-        setName(name);
-        setEmail(email);
-        setPhoneNumber(phoneNumber);
         setCourses(courses);
         setPurchases(purchases);
-        setProgress(progress);
+        setProgresses(progress);
         setSubmissions(submissions);
     }
 
@@ -57,7 +54,7 @@ public:
         this->purchases = purchases;
         return true;
     }
-    bool setProgress(vector<Progress *> progress)
+    bool setProgresses(vector<Progress *> progress)
     {
         // TODO: validation
         this->progress = progress;
@@ -69,4 +66,80 @@ public:
         this->submissions = submissions;
         return true;
     }
+
+    // other
+    static vector<Student *> getStudentsByCourseId(int courseId)
+    {
+        vector<Student *> students;
+        for (int i = 0; i < allStudents.size(); i++)
+        {
+            if (allStudents[i]->getCourses().size() > 0)
+            {
+                for (int j = 0; j < allStudents[i]->getCourses().size(); j++)
+                {
+                    if (allStudents[i]->getCourses()[j]->getId() == courseId)
+                    {
+                        students.push_back(allStudents[i]);
+                    }
+                }
+            }
+        }
+        return students;
+    }
+
+    static Student *getStudentsBySubmissionId(int submissionId)
+    {
+        for (int i = 0; i < allStudents.size(); i++)
+        {
+            if (allStudents[i]->getSubmissions().size() > 0)
+            {
+                for (int j = 0; j < allStudents[i]->getSubmissions().size(); j++)
+                {
+                    if (allStudents[i]->getSubmissions()[j]->getId() == submissionId)
+                    {
+                        return allStudents[i];
+                    }
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    static Student *getStudentByPurchaseId(int purchaseId)
+    {
+        for (int i = 0; i < allStudents.size(); i++)
+        {
+            if (allStudents[i]->getPurchases().size() > 0)
+            {
+                for (int j = 0; j < allStudents[i]->getPurchases().size(); j++)
+                {
+                    if (allStudents[i]->getPurchases()[j]->getId() == purchaseId)
+                    {
+                        return allStudents[i];
+                    }
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    static Student *getStudentByProgressId(int progressId)
+    {
+        for (int i = 0; i < allStudents.size(); i++)
+        {
+            if (allStudents[i]->getProgress().size() > 0)
+            {
+                for (int j = 0; j < allStudents[i]->getProgress().size(); j++)
+                {
+                    if (allStudents[i]->getProgress()[j]->getId() == progressId)
+                    {
+                        return allStudents[i];
+                    }
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    static inline vector<Student *> allStudents = {};
 };

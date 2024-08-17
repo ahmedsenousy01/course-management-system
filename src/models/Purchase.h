@@ -14,27 +14,29 @@ private:
     int studentId;
     Course *course;
     int courseId;
-    string purchaseDate;
+    string timeOfPurchase;
 
 public:
     Purchase()
     {
         this->id = ++idCounter;
-        this->purchaseDate = "";
+        this->timeOfPurchase = "";
     }
-    Purchase(Student *student, Course *course, string purchaseDate)
+    Purchase(Student *student, Course *course, string timeOfPurchase)
     {
         this->id = ++idCounter;
         this->setCourse(course);
         this->setStudent(student);
-        this->setPurchaseDate(purchaseDate);
+        this->setTimeOfPurchase(timeOfPurchase);
     }
 
     // getters
     int getId() { return this->id; }
     Student *getStudent() { return this->student; }
+    int getStudentId() { return this->studentId; }
     Course *getCourse() { return this->course; }
-    string getPurchaseDate() { return this->purchaseDate; }
+    int getCourseId() { return this->courseId; }
+    string getTimeOfPurchase() { return this->timeOfPurchase; }
 
     // setters
     bool setStudent(Student *student)
@@ -43,16 +45,44 @@ public:
         this->student = student;
         return true;
     }
+    bool setStudentId(int studentId)
+    {
+        // TODO: validation
+        this->studentId = studentId;
+        return true;
+    }
     bool setCourse(Course *course)
     {
         // TODO: validation
         this->course = course;
         return true;
     }
-    bool setPurchaseDate(string purchaseDate)
+    bool setCourseId(int courseId)
     {
         // TODO: validation
-        this->purchaseDate = purchaseDate;
+        this->courseId = courseId;
         return true;
     }
+    bool setTimeOfPurchase(string timeOfPurchase)
+    {
+        // TODO: validation
+        this->timeOfPurchase = timeOfPurchase;
+        return true;
+    }
+
+    // other
+    static vector<Purchase *> getPurchasesByStudentId(int studentId)
+    {
+        vector<Purchase *> purchases;
+        for (int i = 0; i < allPurchases.size(); i++)
+        {
+            if (allPurchases[i]->getStudentId() == studentId)
+            {
+                purchases.push_back(allPurchases[i]);
+            }
+        }
+        return purchases;
+    }
+
+    static inline vector<Purchase *> allPurchases = {};
 };
