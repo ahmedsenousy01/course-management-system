@@ -73,4 +73,6 @@ public:
         this->deadline = deadline;
         return true;
     }
+
+    static inline vector<Assignment *> allAssignments = {};
 };

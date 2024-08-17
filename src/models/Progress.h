@@ -22,7 +22,7 @@ public:
         this->courseId = 0;
         this->progress = 0;
     }
-    Progress(int courseId, int studentId, Student *student, Course *course, double progress = 0)
+    Progress(int studentId, int courseId, Student *student, Course *course, double progress = 0)
     {
         this->id = ++idCounter;
         this->setStudent(student);
