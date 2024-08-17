@@ -82,5 +82,19 @@ public:
         return true;
     }
 
+    // others
+    static vector<Submission *> *getSubmissionsByStudentId(int studentId)
+    {
+        vector<Submission *> *submissions = {};
+        for (int i = 0; i < allSubmissions.size(); i++)
+        {
+            if (allSubmissions[i]->getStudentId() == studentId)
+            {
+                submissions->push_back(allSubmissions[i]);
+            }
+        }
+        return submissions;
+    }
+
     static inline vector<Submission *> allSubmissions = {};
 };

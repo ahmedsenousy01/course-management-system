@@ -60,5 +60,32 @@ public:
         return true;
     }
 
+    // others
+    static vector<Enrollment *> *getEnrollmentsByStudentId(int studentId)
+    {
+        vector<Enrollment *> *enrollments = {};
+        for (int i = 0; i < allEnrollments.size(); i++)
+        {
+            if (allEnrollments[i]->getStudentId() == studentId)
+            {
+                enrollments->push_back(allEnrollments[i]);
+            }
+        }
+        return enrollments;
+    }
+
+    static vector<Enrollment *> *getEnrollmentsByCourseId(int courseId)
+    {
+        vector<Enrollment *> *enrollments = new vector<Enrollment *>();
+        for (int i = 0; i < allEnrollments.size(); i++)
+        {
+            if (allEnrollments[i]->getCourseId() == courseId)
+            {
+                enrollments->push_back(allEnrollments[i]);
+            }
+        }
+        return enrollments;
+    }
+
     static inline vector<Enrollment *> allEnrollments = {};
 };

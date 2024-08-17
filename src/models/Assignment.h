@@ -74,5 +74,19 @@ public:
         return true;
     }
 
+    // others
+    static vector<Assignment *> *getAssignmentsByCourseId(int courseId)
+    {
+        vector<Assignment *> *assignments = {};
+        for (int i = 0; i < allAssignments.size(); i++)
+        {
+            if (allAssignments[i]->getCourseId() == courseId)
+            {
+                assignments->push_back(allAssignments[i]);
+            }
+        }
+        return assignments;
+    }
+
     static inline vector<Assignment *> allAssignments = {};
 };

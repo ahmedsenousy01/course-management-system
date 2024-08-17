@@ -298,4 +298,66 @@ public:
         saveAllPurchases();
         saveAllProgresses();
     }
+
+    static void buildModelsRelationships()
+    {
+        // course relationships
+        for (int i = 0; i < Course::allCourses.size(); i++)
+        {
+            // teacher relationship
+            Course::allCourses[i]->setTeacher(Teacher::getTeacherById(Course::allCourses[i]->getTeacherId()));
+
+            // student relationship
+            vector<Enrollment *> *enrollments = Enrollment::getEnrollmentsByCourseId(Course::allCourses[i]->getId());
+
+            for (int j = 0; j < enrollments->size(); j++)
+            {
+                Student *student = Student::getStudentById(enrollments->at(j)->getStudentId());
+                Course::allCourses[i]->addStudent(student);
+            }
+
+            // assignment relationship
+            vector<Assignment *> *assignments = Assignment::getAssignmentsByCourseId(Course::allCourses[i]->getId());
+            Course::allCourses[i]->setAssignments(assignments);
+
+            // purchase relationship
+            vector<Purchase *> *purchases = Purchase::getPurchasesByCourseId(Course::allCourses[i]->getId());
+            Course::allCourses[i]->setPurchases(purchases);
+
+            // progress relationship
+            vector<Progress *> *progresses = Progress::getProgressesByCourseId(Course::allCourses[i]->getId());
+            Course::allCourses[i]->setProgresses(progresses);
+        }
+
+        // student relationships
+        for (int i = 0; i < Student::allStudents.size(); i++)
+        {
+            // enrollment relationship
+            vector<Enrollment *> *enrollments = Enrollment::getEnrollmentsByStudentId(Student::allStudents[i]->getId());
+
+            for (int j = 0; j < enrollments->size(); j++)
+            {
+                Course *course = Course::getCourseById(enrollments->at(j)->getCourseId());
+                Student::allStudents[i]->addCourse(course);
+            }
+
+            // purchase relationship
+            vector<Purchase *> *purchases = Purchase::getPurchasesByStudentId(Student::allStudents[i]->getId());
+            Student::allStudents[i]->setPurchases(purchases);
+
+            // progress relationship
+            vector<Progress *> *progresses = Progress::getProgressesByStudentId(Student::allStudents[i]->getId());
+            Student::allStudents[i]->setProgress(progresses);
+
+            // submission relationship
+            vector<Submission *> *submissions = Submission::getSubmissionsByStudentId(Student::allStudents[i]->getId());
+            Student::allStudents[i]->setSubmissions(submissions);
+        }
+    }
+
+    static void getAllDataWithRelationships()
+    {
+        getAllData();
+        buildModelsRelationships();
+    }
 };

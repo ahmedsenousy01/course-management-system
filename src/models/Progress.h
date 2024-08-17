@@ -72,5 +72,32 @@ public:
         return true;
     }
 
+    // others
+    static vector<Progress *> *getProgressesByCourseId(int courseId)
+    {
+        vector<Progress *> *progresses = {};
+        for (int i = 0; i < allProgresses.size(); i++)
+        {
+            if (allProgresses[i]->getCourseId() == courseId)
+            {
+                progresses->push_back(allProgresses[i]);
+            }
+        }
+        return progresses;
+    }
+
+    static vector<Progress *> *getProgressesByStudentId(int studentId)
+    {
+        vector<Progress *> *progresses = {};
+        for (int i = 0; i < allProgresses.size(); i++)
+        {
+            if (allProgresses[i]->getStudentId() == studentId)
+            {
+                progresses->push_back(allProgresses[i]);
+            }
+        }
+        return progresses;
+    }
+
     static inline vector<Progress *> allProgresses = {};
 };

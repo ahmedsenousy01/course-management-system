@@ -9,6 +9,7 @@ using namespace std;
 #include "Assignment.h"
 #include "Purchase.h"
 #include "Progress.h"
+#include "Enrollment.h"
 
 class Course
 {
@@ -20,10 +21,10 @@ private:
 
     Teacher *teacher;
     int teacherId;
-    vector<Student *> students;
-    vector<Assignment *> assignments;
-    vector<Purchase *> purchases;
-    vector<Progress *> progresses;
+    vector<Student *> *students;
+    vector<Assignment *> *assignments;
+    vector<Purchase *> *purchases;
+    vector<Progress *> *progresses;
 
 public:
     Course()
@@ -34,13 +35,13 @@ public:
         this->price = 0;
         this->teacher = nullptr;
         this->teacherId = 0;
-        this->students = vector<Student *>();
-        this->assignments = vector<Assignment *>();
-        this->purchases = vector<Purchase *>();
-        this->progresses = vector<Progress *>();
+        this->students = new vector<Student *>();
+        this->assignments = new vector<Assignment *>();
+        this->purchases = new vector<Purchase *>();
+        this->progresses = new vector<Progress *>();
     }
 
-    Course(string title, string description, double price, int teacherId, Teacher *teacher, vector<Student *> students = {}, vector<Assignment *> assignments = {}, vector<Purchase *> purchases = {}, vector<Progress *> progresses = {})
+    Course(string title, string description, double price, int teacherId, Teacher *teacher, vector<Student *> *students = {}, vector<Assignment *> *assignments = {}, vector<Purchase *> *purchases = {}, vector<Progress *> *progresses = {})
     {
         this->id = ++idCounter;
         setTitle(title);
@@ -61,10 +62,10 @@ public:
     double getPrice() { return this->price; }
     Teacher *getTeacher() { return this->teacher; }
     int getTeacherId() { return this->teacherId; }
-    vector<Student *> getStudents() { return this->students; }
-    vector<Assignment *> getAssignments() { return this->assignments; }
-    vector<Purchase *> getPurchases() { return this->purchases; }
-    vector<Progress *> getProgresses() { return this->progresses; }
+    vector<Student *> *getStudents() { return this->students; }
+    vector<Assignment *> *getAssignments() { return this->assignments; }
+    vector<Purchase *> *getPurchases() { return this->purchases; }
+    vector<Progress *> *getProgresses() { return this->progresses; }
 
     // setters
     bool setTitle(string title)
@@ -97,29 +98,54 @@ public:
         this->teacherId = teacherId;
         return true;
     }
-    bool setStudents(vector<Student *> students)
+    bool setStudents(vector<Student *> *students)
     {
         // TODO: validation
         this->students = students;
         return true;
     }
-    bool setAssignments(vector<Assignment *> assignments)
+    bool addStudent(Student *student)
+    {
+        // TODO: validation
+        this->students->push_back(student);
+        return true;
+    }
+    bool setAssignments(vector<Assignment *> *assignments)
     {
         // TODO: validation
         this->assignments = assignments;
         return true;
     }
-    bool setPurchases(vector<Purchase *> purchases)
+    bool addAssignment(Assignment *assignment)
+    {
+        // TODO: validation
+        this->assignments->push_back(assignment);
+        return true;
+    }
+    bool setPurchases(vector<Purchase *> *purchases)
     {
         // TODO: validation
         this->purchases = purchases;
         return true;
     }
-    bool setProgresses(vector<Progress *> progresses)
+    bool setProgresses(vector<Progress *> *progresses)
     {
         // TODO: validation
         this->progresses = progresses;
         return true;
+    }
+
+    // others
+    static Course *getCourseById(int courseId)
+    {
+        for (int i = 0; i < allCourses.size(); i++)
+        {
+            if (allCourses[i]->getId() == courseId)
+            {
+                return allCourses[i];
+            }
+        }
+        return nullptr;
     }
 
     static inline vector<Course *> allCourses = {};

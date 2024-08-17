@@ -74,5 +74,32 @@ public:
         return true;
     }
 
+    // others
+    static vector<Purchase *> *getPurchasesByCourseId(int courseId)
+    {
+        vector<Purchase *> *purchases = {};
+        for (int i = 0; i < allPurchases.size(); i++)
+        {
+            if (allPurchases[i]->getCourseId() == courseId)
+            {
+                purchases->push_back(allPurchases[i]);
+            }
+        }
+        return purchases;
+    }
+
+    static vector<Purchase *> *getPurchasesByStudentId(int studentId)
+    {
+        vector<Purchase *> *purchases = {};
+        for (int i = 0; i < allPurchases.size(); i++)
+        {
+            if (allPurchases[i]->getStudentId() == studentId)
+            {
+                purchases->push_back(allPurchases[i]);
+            }
+        }
+        return purchases;
+    }
+
     static inline vector<Purchase *> allPurchases = {};
 };

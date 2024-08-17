@@ -50,20 +50,12 @@ public:
     }
 
     // other
-    static Teacher *getTeacherByCourseId(int courseId)
+    static Teacher *getTeacherById(int teacherId)
     {
         for (int i = 0; i < allTeachers.size(); i++)
         {
-            if (allTeachers[i]->getCourses().size() > 0)
-            {
-                for (int j = 0; j < allTeachers[i]->getCourses().size(); j++)
-                {
-                    if (allTeachers[i]->getCourses()[j]->getId() == courseId)
-                    {
-                        return allTeachers[i];
-                    }
-                }
-            }
+            if (allTeachers[i]->getId() == teacherId)
+                return allTeachers[i];
         }
         return nullptr;
     }
