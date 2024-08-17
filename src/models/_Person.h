@@ -6,17 +6,22 @@ class Person
 {
 private:
     int id;
-    string name, email, phoneNumber;
+    string name, email, password, phoneNumber;
 
 public:
     Person()
     {
         this->name = "";
         this->email = "";
+        this->password = "";
         this->phoneNumber = "";
     }
-    Person(string name, string email, string phoneNumber)
+    Person(string name, string email, string password, string phoneNumber)
     {
+        setName(name);
+        setEmail(email);
+        setPassword(password);
+        setPhoneNumber(phoneNumber);
     }
 
     // getters
@@ -31,6 +36,10 @@ public:
     string getEmail()
     {
         return this->email;
+    }
+    string getPassword()
+    {
+        return this->password;
     }
     string getPhoneNumber()
     {
@@ -53,6 +62,12 @@ public:
     {
         // TODO: validation
         this->email = email;
+        return true;
+    }
+    bool setPassword(string password)
+    {
+        // TODO: validation
+        this->password = password;
         return true;
     }
     bool setPhoneNumber(string phoneNumber)

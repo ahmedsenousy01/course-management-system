@@ -10,6 +10,7 @@ private:
     int id;
     string title;
     Course *course;
+    int courseId;
     double assignmentScore;
     string deadline;
 
@@ -19,14 +20,16 @@ public:
         this->id = ++idCounter;
         this->title = "";
         this->course = nullptr;
+        this->courseId = 0;
         this->assignmentScore = 0;
         this->deadline = "";
     }
-    Assignment(string title, Course *course, double assignmentScore = 0, string deadline = "")
+    Assignment(string title, int courseId, Course *course, double assignmentScore = 0, string deadline = "")
     {
         this->id = ++idCounter;
         this->setTitle(title);
         this->setCourse(course);
+        this->setCourseId(courseId);
         this->setAssignmentScore(assignmentScore);
         this->setDeadline(deadline);
     }
@@ -35,6 +38,7 @@ public:
     int getId() { return this->id; }
     string getTitle() { return this->title; }
     Course *getCourse() { return this->course; }
+    int getCourseId() { return this->courseId; }
     double getAssignmentScore() { return this->assignmentScore; }
     string getDeadline() { return this->deadline; }
 
@@ -49,6 +53,12 @@ public:
     {
         // TODO: validation
         this->course = course;
+        return true;
+    }
+    bool setCourseId(int courseId)
+    {
+        // TODO: validation
+        this->courseId = courseId;
         return true;
     }
     bool setAssignmentScore(double assignmentScore)
