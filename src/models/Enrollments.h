@@ -59,4 +59,6 @@ public:
         this->courseId = courseId;
         return true;
     }
+
+    static inline vector<Enrollment *> allEnrollments = {};
 };

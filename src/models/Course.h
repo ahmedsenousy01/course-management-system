@@ -121,4 +121,6 @@ public:
         this->progresses = progresses;
         return true;
     }
+
+    static inline vector<Course *> allCourses = {};
 };

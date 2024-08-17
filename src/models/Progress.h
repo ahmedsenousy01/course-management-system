@@ -71,4 +71,6 @@ public:
         this->progress = progress;
         return true;
     }
+
+    static inline vector<Progress *> allProgresses = {};
 };

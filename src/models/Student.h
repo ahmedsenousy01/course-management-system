@@ -69,4 +69,6 @@ public:
         this->submissions = submissions;
         return true;
     }
+
+    static inline vector<Student *> allStudents = {};
 };

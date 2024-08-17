@@ -73,4 +73,6 @@ public:
         this->purchaseDate = purchaseDate;
         return true;
     }
+
+    static inline vector<Purchase *> allPurchases = {};
 };

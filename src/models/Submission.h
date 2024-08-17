@@ -81,4 +81,6 @@ public:
         this->submissionDate = submissionDate;
         return true;
     }
+
+    static inline vector<Submission *> allSubmissions = {};
 };
