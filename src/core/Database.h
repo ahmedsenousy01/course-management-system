@@ -411,7 +411,7 @@ public:
         }
     }
 
-    static void getAllDataWithRelationships()
+    static void init()
     {
         getAllData();
         buildModelsRelationships();

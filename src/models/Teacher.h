@@ -60,5 +60,16 @@ public:
         return nullptr;
     }
 
+    static Teacher *getTeacherByEmail(string email)
+    {
+        for (int i = 0; i < allTeachers.size(); i++)
+        {
+            if (allTeachers[i]->getEmail() == email)
+            {
+                return allTeachers[i];
+            }
+        }
+        return nullptr;
+    }
     static inline vector<Teacher *> allTeachers = {};
 };

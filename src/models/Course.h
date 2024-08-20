@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -161,6 +162,38 @@ public:
         }
 
         return courses;
+    }
+
+    void display()
+    {
+        cout << "id: " << this->id << endl;
+        cout << "title: " << this->title << endl;
+        cout << "price: " << this->price << endl;
+    }
+
+    void viewDetails()
+    {
+        cout << "id: " << this->id << endl;
+        cout << "title: " << this->title << endl;
+        cout << "description: " << this->description << endl;
+        cout << "price: " << this->price << endl;
+        cout << "teacherId: " << this->teacherId << endl;
+        cout << "teacher: " << this->teacher->getName() << endl;
+        cout << "students: " << endl;
+        for (int i = 0; i < this->students->size(); i++)
+        {
+            cout << "\t" << this->students->at(i)->getName() << endl;
+        }
+        cout << "assignments: " << endl;
+        for (int i = 0; i < this->assignments->size(); i++)
+        {
+            cout << "\t" << this->assignments->at(i)->getTitle() << endl;
+        }
+        cout << "purchases: " << endl;
+        for (int i = 0; i < this->purchases->size(); i++)
+        {
+            cout << "\t" << this->purchases->at(i)->getStudent()->getName() << endl;
+        }
     }
 
     static inline vector<Course *> allCourses = {};
