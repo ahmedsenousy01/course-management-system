@@ -148,5 +148,20 @@ public:
         return nullptr;
     }
 
+    static vector<Course *> *getCoursesByTeacherId(int teacherId)
+    {
+        vector<Course *> *courses = new vector<Course *>();
+
+        for (int i = 0; i < allCourses.size(); i++)
+        {
+            if (allCourses[i]->getTeacherId() == teacherId)
+            {
+                courses->push_back(allCourses[i]);
+            }
+        }
+
+        return courses;
+    }
+
     static inline vector<Course *> allCourses = {};
 };

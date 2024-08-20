@@ -353,6 +353,62 @@ public:
             vector<Submission *> *submissions = Submission::getSubmissionsByStudentId(Student::allStudents[i]->getId());
             Student::allStudents[i]->setSubmissions(submissions);
         }
+
+        // teacher relationships
+        for (int i = 0; i < Teacher::allTeachers.size(); i++)
+        {
+            //   course relationship
+            vector<Course *> *courses = Course::getCoursesByTeacherId(Teacher::allTeachers[i]->getId());
+            Teacher::allTeachers[i]->setCourses(courses);
+        }
+
+        // assignment relationships
+        for (int i = 0; i < Assignment::allAssignments.size(); i++)
+        {
+            //   course relationship
+            Course *course = Course::getCourseById(Assignment::allAssignments[i]->getCourseId());
+            Assignment::allAssignments[i]->setCourse(course);
+
+            // submission relationship
+            vector<Submission *> *submissions = Submission::getSubmissionsByAssignmentId(Assignment::allAssignments[i]->getId());
+            Assignment::allAssignments[i]->setSubmissions(submissions);
+        }
+
+        // submission relationships
+        for (int i = 0; i < Submission::allSubmissions.size(); i++)
+        {
+            // student relationship
+            Student *student = Student::getStudentById(Submission::allSubmissions[i]->getStudentId());
+            Submission::allSubmissions[i]->setStudent(student);
+
+            // assignment relationship
+            Assignment *assignment = Assignment::getAssignmentById(Submission::allSubmissions[i]->getAssignmentId());
+            Submission::allSubmissions[i]->setAssignment(assignment);
+        }
+
+        // progress relationships
+        for (int i = 0; i < Progress::allProgresses.size(); i++)
+        {
+            // student relationship
+            Student *student = Student::getStudentById(Progress::allProgresses[i]->getStudentId());
+            Progress::allProgresses[i]->setStudent(student);
+
+            // course relationship
+            Course *course = Course::getCourseById(Progress::allProgresses[i]->getCourseId());
+            Progress::allProgresses[i]->setCourse(course);
+        }
+
+        // purchase relationships
+        for (int i = 0; i < Purchase::allPurchases.size(); i++)
+        {
+            // student relationship
+            Student *student = Student::getStudentById(Purchase::allPurchases[i]->getStudentId());
+            Purchase::allPurchases[i]->setStudent(student);
+
+            // course relationship
+            Course *course = Course::getCourseById(Purchase::allPurchases[i]->getCourseId());
+            Purchase::allPurchases[i]->setCourse(course);
+        }
     }
 
     static void getAllDataWithRelationships()

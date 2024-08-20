@@ -13,6 +13,7 @@ private:
     int courseId;
     double assignmentScore;
     string deadline;
+    vector<Submission *> *submissions;
 
 public:
     Assignment()
@@ -23,6 +24,7 @@ public:
         this->courseId = 0;
         this->assignmentScore = 0;
         this->deadline = "";
+        this->submissions = new vector<Submission *>();
     }
     Assignment(string title, int courseId, Course *course, double assignmentScore = 0, string deadline = "")
     {
@@ -41,6 +43,7 @@ public:
     int getCourseId() { return this->courseId; }
     double getAssignmentScore() { return this->assignmentScore; }
     string getDeadline() { return this->deadline; }
+    vector<Submission *> *getSubmissions() { return this->submissions; }
 
     // setters
     bool setTitle(string title)
@@ -73,6 +76,12 @@ public:
         this->deadline = deadline;
         return true;
     }
+    bool setSubmissions(vector<Submission *> *submissions)
+    {
+        // TODO: validation
+        this->submissions = submissions;
+        return true;
+    }
 
     // others
     static vector<Assignment *> *getAssignmentsByCourseId(int courseId)
@@ -86,6 +95,18 @@ public:
             }
         }
         return assignments;
+    }
+
+    static Assignment *getAssignmentById(int id)
+    {
+        for (int i = 0; i < allAssignments.size(); i++)
+        {
+            if (allAssignments[i]->getId() == id)
+            {
+                return allAssignments[i];
+            }
+        }
+        return nullptr;
     }
 
     static inline vector<Assignment *> allAssignments = {};

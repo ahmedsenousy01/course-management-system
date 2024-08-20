@@ -96,5 +96,18 @@ public:
         return submissions;
     }
 
+    static vector<Submission *> *getSubmissionsByAssignmentId(int assignmentId)
+    {
+        vector<Submission *> *submissions = {};
+        for (int i = 0; i < allSubmissions.size(); i++)
+        {
+            if (allSubmissions[i]->getAssignmentId() == assignmentId)
+            {
+                submissions->push_back(allSubmissions[i]);
+            }
+        }
+        return submissions;
+    }
+
     static inline vector<Submission *> allSubmissions = {};
 };

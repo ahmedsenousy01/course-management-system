@@ -12,7 +12,7 @@ private:
     static inline int numberOfTeachers = 22000;
 
     double salary;
-    vector<Course *> courses;
+    vector<Course *> *courses;
 
 public:
     Teacher()
@@ -20,7 +20,7 @@ public:
         numberOfTeachers++;
         this->setId(numberOfTeachers);
     }
-    Teacher(string name, string email, string password, string phoneNumber, double salary, vector<Course *> courses = {}) : Person(name, email, password, phoneNumber)
+    Teacher(string name, string email, string password, string phoneNumber, double salary, vector<Course *> *courses = {}) : Person(name, email, password, phoneNumber)
     {
         numberOfTeachers++;
         this->setId(numberOfTeachers);
@@ -33,7 +33,7 @@ public:
 
     // Getters
     double getSalary() { return salary; }
-    vector<Course *> getCourses() { return this->courses; }
+    vector<Course *> *getCourses() { return this->courses; }
 
     // Setters
     bool setSalary(double salary)
@@ -42,7 +42,7 @@ public:
         this->salary = salary;
         return true;
     }
-    bool setCourses(vector<Course *> courses)
+    bool setCourses(vector<Course *> *courses)
     {
         // TODO: validation
         this->courses = courses;
